@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/text.css"/>
+    <link rel="stylesheet" href="css/960.css"/>
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        #main button{
+            margin:12px auto;
+            padding: 5px 20px;
+        }
+        #main .text {
+            margin: 20px 40px;
+            padding-left: 0px;
+        }
+        #main .text span {
+            display: inline-block;
+            width: 20px;
+        }
+        #main .text input {
+            text-align: right;
+            width: 60px;
+        }
+        .sample {
+            height: 165px;
+        }
+        .principle div{
+            box-sizing: border-box;
+            border:1px solid #000;
+            width:180px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-bottom:20px;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+        .principle div sup{
+            top: -0.25em;
+        }
+
+
+
+        #main .result-left{
+            height:100px;
+            background: #b5f7f6;
+            border-radius: 10px;
+        }
+        #main .result-left>span{
+            display:inline-block;
+            background: #fff;
+            height:80px;
+            margin:10px auto;
+            font-size:65px;
+            line-height: 80px;
+        }
+        #main .result-left>span>sub{
+            font-size:30px;
+        }
+        #main .result-left>span:nth-child(1){
+            border-radius: 10px 0 0 10px;
+            padding-left: 20px;
+            padding-right: 60px;
+        }
+        #main .result-left>span:nth-child(3){
+            padding-right: 60px;
+            border-radius: 0 10px 10px 0;
+        }
+        #foot  .grid_3:after {
+            content: ".";
+            visibility: hidden;
+        }
+        .footicon1 {
+            width: 180px;
+            float: left;
+            margin-top: 23px;
+        }
+        .footicon2 {
+            width: 320px;
+            float: left;
+            margin-top: 23px;
+        }
+        .footicon2 button{
+            padding: 10px 20px;
+        }
+
+
+
+        .charts-nav-left {
+            height: 60px;
+            background: url("./images/charts-navleft.png") no-repeat;
+        }
+        .charts-nav-right {
+            height: 60px;
+            background: url("./images/charts-navright.png") no-repeat;
+        }
+
+        .charts {
+            position: relative;
+        }
+        .charts>span {
+            position: absolute;
+            font-size: 20px;
+            color: #fff;
+        }
+        .charts>span.left {
+            top: 2px;
+            left: 110px;
+        }
+        .charts>span.right {
+            top: 2px;
+            left: 256px;
+        }
+        .result-table{
+            height:326px;
+            overflow-y: auto;
+        }
+        .result-table table{
+            margin:20px auto;
+
+        }
+        .result-table table td{
+            border:1px solid #000;
+            width:90px;
+            height:48px;
+            text-align: center;
+            line-height: 48px;
+        }
+        .result-table>table>tbody>tr:nth-child(1)>td:nth-child(6),
+        .result-table>table>tbody>tr:nth-child(1)>td:nth-child(7){
+            line-height: 24px;
+        }
+
+        .result-table table tr>td:nth-child(3){
+            color:red;
+        }
+
+
+
+    </style>
+</head>
+<body ng-controller="principle">
+<div id="nav">
+    <div class="nav_4">
+        <img class="logo" src="images/logo-1.png" alt="">
+    </div>
+    <div class="title nav_7 text-center">浮力定律</div>
+    <div class="nav_5">图标</div>
+</div>
+<div class="clear"></div>
+
+<div id="main" class="container_12" >
+
+    <div ng-show="lefta">
+    <div class="grid_3 position">
+        <div class="text-center">
+            <button ng-click="switch()">实验原理</button>
+        </div>
+
+
+        <img ng-show="a" class="sample" src="images/boat.png" alt="">
+
+        <div ng-show="b" class="principle" style="height:233px;width:218px;">
+
+            <div>F<sub>浮</sub>=G-F<sub>拉</sub></div>
+            <div>V<sub>排</sub>=π*r<sup>2</sup>*H</div>
+            <div>G<sub>排</sub>=ρ*g*V<sub>排</sub></div>
+        </div>
+
+
+
+
+        <div class="text"><span>G=</span><input ng-model="v1" ng-init="v1=3" type="number" min="0" max="999999">N</div>
+        <div class="text"><span>r=</span><input ng-model="v2" ng-init="v2=2.5" type="number" min="0" max="999999">cm</div>
+        <div class="text"><span>ρ=</span><input ng-model="v3" ng-init="v3=1.0" type="number" min="0" max="999999">g/cm^3</div>
+        <div class="text"><span>g=</span><input ng-model="v4" ng-init="v4=9.8" type="number" min="0" max="999999">m/s^2</div>
+    </div>
+    </div>
+
+
+<!--TODO  -->
+    <div ng-show="leftb">
+        <div class="grid_3 position">
+
+
+            <div class="result-table-b">
+                <table>
+                    <tr>
+                        <td>序号</td>
+                        <td>G/N</td>
+                        <td>F拉/N</td>
+                        <td>F浮/N</td>
+                    </tr>
+
+                    <tr ng-repeat="x in result">
+                        <td>{{$index+1}}</td>
+                        <td>{{ v1 }}</td>
+                        <td>{{ x.City }}</td>
+                        <td>{{ x.City-v1 }}</td>
+                    </tr>
+
+                </table>
+
+
+                <div ng-class="{active :active}" ng-click=remove()>阿瑟大时代</div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <div class="grid_9 text-center charts">
+        <span class="left" ng-click="table()">数据表格</span>
+        <span class="right" ng-click="curve()">数据曲线</span>
+
+        <div ng-show="c">
+            <div class="charts-nav-left"></div>
+            <div class="result-left"><span>F<sub>拉</sub></span><span>2.5</span><span>N</span></div>
+            <!--f拉表格 -->
+            <div class="result-table">
+                <table>
+                    <tr>
+                        <td>序号</td>
+                        <td>G/N</td>
+                        <td>F拉/N</td>
+                        <td>F浮/N</td>
+                        <td>深度H/cm</td>
+                        <td>V排/m^3<br>(π*r^2*H)</td>
+                        <td>G排/N<br>(ρ*g*V排)</td>
+                    </tr>
+
+                    <tr ng-repeat="x in result">
+                        <td>{{$index+1}}</td>
+                        <td>{{ v1 }}</td>
+
+                        <td ng-class="bg[$index]"  ng-click=isActive($index)>{{ x.City }}</td>
+
+                        <td>{{ x.City-v1 }}</td>
+
+                        <td ><input  ng-model="depth"  style="width:90px;height:46px;border:none;text-align: center" type="number" min="0"></td>
+
+                        <td ng-init="depth=0">{{(PI*v2*v2*depth).toFixed(3)}}</td>
+
+                        <td>{{ (PI*v2*v2*depth*v3*v4).toFixed(3)}}</td>
+
+                    </tr>
+
+
+                </table>
+
+
+
+
+            </div>
+
+        </div>
+        <div ng-show="d">
+            <div class="charts-nav-right"></div>
+            <div class="result-right" id="chartsBox" style="width: 700px;height:430px;">
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<div class="clear"></div>
+<div   id="foot">
+
+    <div  class="container_12">
+        <div class="grid_3 text-center">
+        </div>
+        <div ng-show="e">
+            <div class="footicon1 text-center">
+                <span><img src="images/calibration.png" alt=""></span>
+                <p>校准</p>
+            </div>
+            <div class="footicon1 text-center">
+                <span><img src="images/record.png" alt=""></span>
+                <p>记录</p>
+            </div>
+            <div class="footicon1 text-center">
+                <span><img src="images/delete.png" alt=""></span>
+                <p>删除</p>
+            </div>
+            <div class="footicon1 text-center">
+                <span><img src="images/reset.png" alt=""></span>
+                <p>重置</p>
+            </div>
+        </div>
+
+
+        <div ng-show="f">
+
+            <div class="footicon2 text-center">
+                <button>选区</button>
+            </div>
+            <div class="footicon2 text-center">
+                <button>直线拟合</button>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+
+<script src="js/angular.min.js"></script>
+<script src="js/echarts.js"></script>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('principle', function($scope) {
+        $scope.a=true;
+        $scope.b=false;
+        $scope.switch=function () {
+            $scope.b=!$scope.b;
+            $scope.a=!$scope.a;
+        };
+
+        $scope.c=true;
+        $scope.d=false;
+        $scope.e=true;
+        $scope.f=false;
+        $scope.lefta=true;
+        $scope.leftb=false;
+
+        $scope.table=function () {
+            $scope.c=true;
+            $scope.d=false;
+            $scope.e=true;
+            $scope.f=false;
+            $scope.lefta=true;
+            $scope.leftb=false;
+        };
+        $scope.curve=function () {
+            $scope.c=false;
+            $scope.d=true;
+            $scope.e=false;
+            $scope.f=true;
+            $scope.lefta=false;
+            $scope.leftb=true;
+        };
+        /*$scope.PI=Math.PI;*/
+        $scope.PI=3.14;
+        $scope.isActive = function(index){
+            $scope.bg = [];
+            $scope.bg[index] = 'active';
+        }
+
+
+
+
+
+
+        $scope.result=[
+            {
+                "Name" : 2,
+                "City" : 5,
+                "qqw":5454,
+                "Country" : 3
+            },
+            {
+                "Name" : 3,
+                "City" : 5,
+                "qqw":5454,
+                "Country" : 3
+            },
+            {
+                "Name" : 3,
+                "City" : 6,
+                "qqw":5454,
+                "Country" : 3
+            },
+            {
+                "Name" : 5,
+                "City" : 12,
+                "qqw":5454,
+                "Country" : 3
+            },
+            {
+                "Name" : 5,
+                "City" : 12,
+                "qqw":5454,
+                "Country" : 3
+            },
+            {
+                "Name" : 1,
+                "City" : 12,
+                "qqw":5454,
+                "Country" : 3
+            }
+        ];
+
+
+
+
+
+
+
+//下面是angularjs结束括号
+    });
+
+
+
+
+                                    /* TODO 图标表格*/
+    var myChart = echarts.init(document.getElementById('chartsBox'));
+    // 指定图表的配置项和数据
+
+    // 显示标题，图例和空的坐标轴
+    myChart.setOption({
+
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            boundaryGap:false,
+            name:"时间（秒）",
+            nameLocation:'middle',
+            nameTextStyle:{
+                color:'red',
+                fontStyle:'bold'
+            },
+
+
+
+            nameGap:20,
+            data: [1,2,3,4,5,6,7]
+        },
+        yAxis: {
+            type:"value",
+            name:"温度（℃）",
+            nameLocation:'middle',
+            nameTextStyle:{
+                color:'red',
+                fontStyle:'bold'
+            },
+            nameGap:25,
+
+        },
+        series: [{
+            name:'温度',
+            type: 'line',
+            data: [5, 30, 15, 10, 10, 20,5]
+        }]
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

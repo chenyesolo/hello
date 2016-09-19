@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8"/>
+    <title>
+        Title
+    </title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/text.css" />
+    <link rel="stylesheet" href="css/960.css" />
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="//chenyeah.top/lib/angular-1.5.8-min.js"></script>
+    <script src="//chenyeah.top/lib/echarts-3.2.3-min.js"></script>
+    <style>
+        .position{
+            border:none;
+        }
+        .footicon{
+            width: 240px;
+            float: left;
+            margin-top:23px;
+        }
+        .table{
+            height: 100px;
+            overflow: hidden;
+            overflow-x: auto;
+            width:700px;
+            overflow-x: auto;
+
+        }
+        #main .table table{
+            width:900px;
+        }
+        #main .table table td{
+            width: 70px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid #000;
+
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div id="nav">
+    <div class="nav_4">
+        <img class="logo" src="images/logo-1.png" alt=""/>
+    </div>
+    <div class="title nav_7 text-center">
+        水凝固与冰融化
+    </div>
+    <div class="nav_5">
+        图标
+    </div>
+</div>
+<div class="clear">
+</div>
+<div id="main" class="container_12">
+    <div  class="grid_3 text-center position">
+        <div class="icon">
+                    <span>
+                        显示
+                    </span>
+        </div>
+        <img class="sample" src="images/waterice.png" alt=""/>
+        <div class="box text-center">
+                    <span>
+                        {{forces}}℃
+                    </span>
+        </div>
+    </div>
+    <div class="grid_9 text-center charts">
+        <div class="table" ng-controller="fillTable" ng-style="mytable">
+            <table>
+                <tr>
+                    <td ng-repeat="x in names">
+                        {{x.Name }}
+                    </td>
+                </tr>
+                <tr >
+                    <td ng-repeat="x in names">
+                        {{x.Country }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="chartsBox" style="width: 700px;height:390px;">
+        </div>
+    </div>
+</div>
+<div class="clear">
+</div>
+<div id="foot">
+    <div class="container_12">
+        <div class="grid_3 text-center">
+            <div class="interval">
+                        <span>
+                            采集数据间隔
+                        </span>
+                <select ng-model="selectedName" ng-options="x for x in optionNames">
+                </select>
+            </div>
+        </div>
+        <div class="footicon text-center">
+                    <span>
+                        <img src="images/play.png" alt=""/>
+                    </span>
+            <p>
+                开始
+            </p>
+        </div>
+        <div class="footicon text-center">
+                    <span>
+                        <img src="images/pause.png" alt=""/>
+                    </span>
+            <p>
+                停止
+            </p>
+        </div>
+        <div class="footicon text-center">
+                    <span>
+                        <img src="images/painting.png" alt=""/>
+                    </span>
+            <p>
+                绘图
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    /*左侧显示牛顿力*/
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.forces = 36.5;
+        $scope.optionNames = ["10毫秒", "100毫秒", "1000毫秒"];
+    });
+    app.controller('fillTable',function($scope,$http){
+        $http.get("a.json")
+                .success(function (response) {$scope.names = response.records;});
+
+
+        $scope.mytable={
+
+        };
+
+
+    });
+    /*图标表格*/
+    var myChart = echarts.init(document.getElementById('chartsBox'));
+    // 指定图表的配置项和数据
+    // 显示标题，图例和空的坐标轴
+    myChart.setOption({
+        tooltip: {},
+        xAxis: {
+            boundaryGap:false,
+            name:"时间（秒）",
+            nameLocation:'middle',
+            nameTextStyle:{
+                color:'red',
+                fontStyle:'bold'
+            },
+            nameGap:20,
+            data: [1,2,3,4,5,6,7,8]
+        },
+        yAxis: {
+            type:"value",
+            name:"温度（℃）",
+            nameLocation:'middle',
+            nameTextStyle:{
+                color:'red',
+                fontStyle:'bold'
+            },
+            nameGap:25
+        },
+        series: [{
+            name:'温度',
+            type: 'line',
+            data: [5, 30, 15, 10, 10, 20,5,20]
+        }]
+    });
+
+   /*点开始按钮滚动条自动往右滚动  要自动算距离*/
+    var mytable=document.querySelector(".table");
+    console.log(mytable);
+    (function () {
+        console.log("aDA");
+        mytable.scrollLeft=200;
+    })();
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/text.css" />
+    <link rel="stylesheet" href="css/960.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <script src="//cdn.bootcss.com/angular.js/1.5.8/angular.js"></script>
+    <script src="//cdn.bootcss.com/echarts/3.2.3/echarts.common.min.js"></script>
+    <style>
+        .table{
+            height:490px;
+            overflow-y: scroll;
+        }
+        .table table{
+            margin-top: 10px;
+            margin-left:10px;
+
+        }
+        .table table td{
+            border:1px solid #000;
+            width:60px;
+            height:20px;
+            text-align: center;
+            line-height: 20px;
+        }
+
+
+
+        .footicon {
+            width: 180px;
+            float: left;
+            margin-top: 23px;
+        }
+
+
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <div id="nav">
+        <div class="nav_4">
+            <img class="logo" src="images/logo-1.png" alt="">
+        </div>
+        <div class="title nav_7 text-center">物体间力的作用是相互的吗</div>
+        <div class="nav_5">图标</div>
+    </div>
+    <div class="clear"></div>
+
+    <div id="main" class="container_12">
+        <div  class="grid_3 text-center position">
+            <div class="table">
+            <table>
+                <tr>
+                    <td>时间/秒</td>
+                    <td>F1/N</td>
+                    <td>F2/N</td>
+                </tr>
+
+                <tr ng-repeat="x in result">
+                    <td>{{x.Name}}</td>
+                    <td>{{x.City}}</td>
+                    <td>{{x.qqw}}</td>
+                </tr>
+
+            </table>
+
+            </div>
+        </div>
+        <div class="grid_9 text-center charts">
+            <div id="chartsBox" style="width: 700px;height:472px;">
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="foot">
+        <div class="container_12">
+        <div class="grid_3 text-center">
+            <div class="interval">
+                <span>采集数据间隔</span>
+                <select ng-model="selectedName" ng-options="x for x in optionNames">
+                </select>
+
+            </div>
+        </div>
+        <div class="footicon text-center">
+            <span><img src="images/calibration.png" alt=""></span>
+            <p>校准</p>
+        </div>
+        <div class="footicon text-center">
+            <span><img src="images/record.png" alt=""></span>
+            <p>记录</p>
+        </div>
+        <div class="footicon text-center">
+            <span><img src="images/delete.png" alt=""></span>
+            <p>删除</p>
+        </div>
+        <div class="footicon text-center">
+            <span><img src="images/reset.png" alt=""></span>
+            <p>重置</p>
+        </div>
+    </div>
+
+    </div>
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope) {
+
+
+
+            $scope.result=[
+                {
+                    "Name" : 2,
+                    "City" : 5,
+                    "qqw":5454,
+                    "Country" : 3
+                },
+                {
+                    "Name" : 3,
+                    "City" : 5,
+                    "qqw":5454,
+                    "Country" : 3
+                },
+                {
+                    "Name" : 3,
+                    "City" : 6,
+                    "qqw":5454,
+                    "Country" : 3
+                },
+                {
+                    "Name" : 5,
+                    "City" : 12,
+                    "qqw":5454,
+                    "Country" : 3
+                },
+                {
+                    "Name" : 5,
+                    "City" : 12,
+                    "qqw":5454,
+                    "Country" : 3
+                },
+                {
+                    "Name" : 1,
+                    "City" : 12,
+                    "qqw":5454,
+                    "Country" : 3
+                }
+            ];
+
+        });
+
+
+        /*图标表格*/
+        var myChart = echarts.init(document.getElementById('chartsBox'));
+        // 指定图表的配置项和数据
+
+        // 显示标题，图例和空的坐标轴
+        myChart.setOption({
+
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                boundaryGap:false,
+                name:"时间（秒）",
+                nameLocation:'middle',
+                nameTextStyle:{
+                    color:'red',
+                    fontStyle:'bold'
+                },
+
+
+
+                nameGap:20,
+                data: [1,2,3,4,5,6,7]
+            },
+            yAxis: {
+                type:"value",
+                name:"温度（℃）",
+                nameLocation:'middle',
+                nameTextStyle:{
+                    color:'red',
+                    fontStyle:'bold'
+                },
+                nameGap:25,
+
+            },
+            series: [{
+                name:'温度',
+                type: 'line',
+                data: [5, 30, 15, 10, 10, 20,5]
+            }]
+        });
+
+
+    </script>
+
+</body>
+</html>

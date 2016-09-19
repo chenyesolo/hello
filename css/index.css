@@ -1,0 +1,101 @@
+#nav {
+  height: 124px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1024px;
+  background: #17bbf0;
+  margin-bottom: 30px; }
+
+.nav_4 {
+  width: 256px; }
+
+.nav_7 {
+  width: 448px; }
+
+.nav_5 {
+  width: 320px; }
+
+.nav_4, .nav_5, .nav_7 {
+  float: left; }
+
+.text-center {
+  text-align: center; }
+
+.logo {
+  height: 124px; }
+
+#main {
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+  height: 490px; }
+
+.title {
+  color: #fff;
+  font-size: 25px;
+  line-height: 124px; }
+
+.sample {
+  height: 330px;
+  margin: 34px auto; }
+
+.charts {
+  box-sizing: border-box;
+  border: 1px solid #b7b7b7;
+  border-radius: 10px;
+  height: 490px; }
+
+.box {
+  border-radius: 10px;
+  background: #b5f7f6;
+  font-size: 60px;
+  height: 90px; }
+
+.position {
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #b7b7b7;
+  height: 490px; }
+
+.icon {
+  background: url("../images/icon-1.png");
+  width: 20px;
+  height: 64px;
+  position: absolute;
+  top: 100px;
+  right: -20px; }
+  .icon span {
+    display: block;
+    margin-top: 20px;
+    color: #fff; }
+
+#foot {
+  background: url("../images/footbg.png");
+  height: 124px;
+  width: 1024px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.interval {
+  margin: 40px auto;
+  width: 200px;
+  height: 30px;
+  border: 2px solid #ddd;
+  font-size: 16px;
+  color: #9ba3a8;
+  line-height: 30px;
+  border-radius: 5px; }
+  .interval select {
+    color: #9ba3a8;
+    font-size: 16px;
+    height: 22px;
+    line-height: 18px;
+    padding: 2px 0; }
+
+#foot span img {
+  height: 54px; }
+
+.active {
+  background: #67c5e0; }
+
+/*# sourceMappingURL=index.css.map */
